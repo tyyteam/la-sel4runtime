@@ -36,7 +36,7 @@ config_string(
 add_config_library(sel4runtime "${configure_string}")
 
 list(APPEND crt_files crt/sel4_arch/${KernelSel4Arch}/crti.S crt/sel4_arch/${KernelSel4Arch}/crtn.S)
-if("${KernelArch}" STREQUAL "riscv")
+if("${KernelArch}" STREQUAL "riscv" OR "${KernelArch}" STREQUAL "loongarch")
     list(APPEND crt_files crt/arch/${KernelArch}/crt0.S crt/arch/${KernelArch}/sel4_crt0.S)
 else()
     list(
