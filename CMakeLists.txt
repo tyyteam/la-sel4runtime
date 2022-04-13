@@ -15,7 +15,6 @@
 cmake_minimum_required(VERSION 3.12.0)
 
 project(sel4runtime C ASM)
-
 set(configure_string "")
 config_string(
     Sel4RuntimeRootStack
@@ -34,7 +33,6 @@ config_string(
     UNQUOTE
 )
 add_config_library(sel4runtime "${configure_string}")
-
 list(APPEND crt_files crt/sel4_arch/${KernelSel4Arch}/crti.S crt/sel4_arch/${KernelSel4Arch}/crtn.S)
 if("${KernelArch}" STREQUAL "riscv" OR "${KernelArch}" STREQUAL "loongarch")
     list(APPEND crt_files crt/arch/${KernelArch}/crt0.S crt/arch/${KernelArch}/sel4_crt0.S)
@@ -79,7 +77,6 @@ add_custom_target(
         "${CMAKE_BINARY_DIR}/lib/crt0.o" "${CMAKE_BINARY_DIR}/lib/crti.o"
         "${CMAKE_BINARY_DIR}/lib/crtn.o"
 )
-
 list(
     APPEND
         sources
