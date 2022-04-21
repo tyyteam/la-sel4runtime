@@ -25,18 +25,19 @@ _start:
  *
  * https://web.archive.org/web/20170828212605/https://www.sifive.com/blog/2017/08/28/all-aboard-part-3-linker-relaxation-in-riscv-toolchain/
  */
-.option push
-.option norelax
-1:auipc gp, %pcrel_hi(__global_pointer$)
-  addi  gp, gp, %pcrel_lo(1b)
+.option push    /*CY 将所有.option操作压入栈 */
+.option norelax /*CY 不允许链接器松弛 */
+/*CY 关于下面两条指令 https://github.com/riscv-non-isa/riscv-asm-manual/issues/30 */
+1:auipc gp, %pcrel_hi(__global_pointer$)  /*CY gp+=当前PC和__global_pointer$之间距离的高20位 */
+  addi  gp, gp, %pcrel_lo(1b)  /*CY 1b和__global_pointer$之间距离的低12位 */
 .option pop
 
-	li s0, 0
+	li s0, 0  /*CY s0置0 */
 
-	addi  a0, sp, 0
-	la x5, __sel4_start_c
-	jalr ra, x5, 0
+	addi  a0, sp, 0  /*CY sp -> a0 */
+	la x5, __sel4_start_c  /*CY 将__sel4_start_c的地址加载到x5中 */
+	jalr ra, x5, 0  /*CY pc=([x5] + 0) & ~1, ra = pc + 4 */
 
 	/* should not return */
 1:
-	j 1b
+	j 1b  /*CY 跳转到1b，这里是一个死循环 */
