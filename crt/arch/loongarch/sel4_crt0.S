@@ -8,7 +8,7 @@
  .section .text
  .global _sel4_start
  _sel4_start:
-    la sp, __stack_top
+    la $sp, __stack_top
     bl __sel4_start_root
     /* should not return */
 1:

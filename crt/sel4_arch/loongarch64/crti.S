@@ -6,15 +6,15 @@
 .section .init
 .global _init
 _init:
-    addi sp, sp, -16
-    st.d fp, sp, 0
-    st.d ra, sp, 8
-    addi fp, sp, 0
+    addi.d  $sp, $sp, -16
+    st.d    $fp, $sp, 0
+    st.d    $ra, $sp, 8
+    addi.d  $fp, $sp, 0
 
 .section .fini
 .global _fini
 _fini:
-    addi sp, sp, -16
-    st.d fp, sp, 0
-    st.d ra, sp, 8
-    addi fp, sp, 0
+    addi.d  $sp, $sp, -16
+    st.d    $fp, $sp, 0
+    st.d    $ra, $sp, 8
+    addi.d  $fp, $sp, 0
