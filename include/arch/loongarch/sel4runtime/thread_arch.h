@@ -9,7 +9,7 @@ static inline sel4runtime_uintptr_t sel4runtime_read_tp(void)
 {
 #ifdef __clang__
     sel4runtime_uintptr_t reg;
-    __asm__ __volatile__("or %0, tp, x0" : "=r"(reg));
+    __asm__ __volatile__("or %0, $tp, $r0" : "=r"(reg));
 #else
     register sel4runtime_uintptr_t reg __asm__("tp");
 #endif
@@ -18,7 +18,7 @@ static inline sel4runtime_uintptr_t sel4runtime_read_tp(void)
 
 static inline void sel4runtime_write_tp(sel4runtime_uintptr_t reg)
 {
-    __asm__ __volatile__("or tp, %0, x0" :: "r"(reg));
+    __asm__ __volatile__("or $tp, %0, $r0" :: "r"(reg));
 }
 
 /*
